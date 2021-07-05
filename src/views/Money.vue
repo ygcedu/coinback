@@ -9,3 +9,11 @@ export default {
   name: 'Money'
 };
 </script>
+
+<style lang="scss" scoped>
+@import "~@/assets/styles/helper.scss";
+
+p {
+  color: $red;
+}
+</style>
