@@ -22,6 +22,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~@/assets/styles/helper.scss";
 nav {
   display: flex;
   /*底部加阴影，有种浮起来的效果*/
@@ -44,7 +45,7 @@ nav {
   }
 
   > .item.selected {
-    color: red;
+    color: $color-highlight;
   }
 }
 </style>
