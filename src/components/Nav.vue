@@ -1,37 +1,23 @@
 <template>
   <div class="nav">
     <router-link to="/money">
-      <svg>
-        <use xlink:href="#money"></use>
-      </svg>
+      <Icon name="money"/>
       记账
     </router-link>
     |
     <router-link to="/labels">
-      <svg>
-        <use xlink:href="#label"></use>
-      </svg>
+      <Icon name="labels"/>
       标签
     </router-link>
     |
     <router-link to="/statistics">
-      <svg>
-        <use xlink:href="#statistics"></use>
-      </svg>
+      <Icon name="statistics"/>
       统计
     </router-link>
   </div>
 </template>
 
 <script lang="ts">
-// eslint-disable-next-line no-undef
-let importAll = (requireContext: __WebpackModuleApi.RequireContext) => requireContext.keys().forEach(requireContext);
-try {
-  importAll(require.context('../assets/icons', true, /\.svg$/));
-} catch (error) {
-  console.log(error);
-}
-
 export default {
   name: 'Nav'
 };
