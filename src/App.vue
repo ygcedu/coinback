@@ -11,6 +11,16 @@
   box-sizing: border-box;
 }
 
+body {
+  line-height: 1.5;
+}
+
+//去除 a 标签下划线和颜色
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
