@@ -5,29 +5,19 @@
 </template>
 
 <style lang="scss">
+@import "~@/assets/styles/helper.scss";
 @import "~@/assets/styles/reset.scss";
 body {
-  line-height: 1.5;
+
 }
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  /*针对苹果系统的优化*/
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+  /*浅黑色*/
+  color: #333;
+  font-family: $font-hei;
+  line-height: 1.5;
 }
 </style>
