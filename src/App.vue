@@ -21,10 +21,4 @@ body {
   font-size: 16px;
   line-height: 1.5;
 }
-
-.clearfix::after {
-  content: '';
-  display: block;
-  clear: both;
-}
 </style>

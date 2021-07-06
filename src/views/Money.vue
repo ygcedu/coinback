@@ -141,6 +141,7 @@ export default {
 
 .numberPad {
   .output {
+    @extend %clearFix;
     font-size: 36px;
     // 使用当前计算机支持的一种等宽字体
     font-family: Consolas, monospace;
@@ -151,6 +152,7 @@ export default {
   .buttons {
     //display: flex;
     //flex-wrap: wrap;
+    @extend %clearFix;
 
     > button {
       width: 25%;
