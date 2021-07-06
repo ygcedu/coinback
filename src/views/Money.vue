@@ -21,7 +21,6 @@ export default {
 
 <style lang="scss">
 .layout-content {
-  border: 3px solid red;
   display: flex;
   // 从下往上布局
   flex-direction: column-reverse;

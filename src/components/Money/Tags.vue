@@ -34,7 +34,6 @@ export default {
 .tags {
   // 占满 flex 布局的剩余空间
   flex-grow: 1;
-  border: 1px solid red;
   font-size: 14px;
   padding: 16px;
   display: flex;
