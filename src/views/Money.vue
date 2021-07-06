@@ -1,5 +1,5 @@
 <template>
-  <Layout>
+  <Layout content-class="xxx">
     <div class="tags">
       <ul class="current">
         <li>衣</li>
@@ -50,6 +50,12 @@ export default {
   name: 'Money'
 };
 </script>
+
+<style lang="scss">
+.xxx {
+  border: 1px solid red;
+}
+</style>
 
 <style lang="scss" scoped>
 @import "~@/assets/styles/helper.scss";
