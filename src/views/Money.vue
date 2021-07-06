@@ -25,7 +25,7 @@
     </div>
     <div class="numberPad">
       <div class="output">100</div>
-      <div class="buttons">
+      <div class="buttons clearfix">
         <button>1</button>
         <button>2</button>
         <button>3</button>
@@ -37,8 +37,8 @@
         <button>7</button>
         <button>8</button>
         <button>9</button>
-        <button>OK</button>
-        <button>0</button>
+        <button class="ok">OK</button>
+        <button class="zero">0</button>
         <button>.</button>
       </div>
     </div>
@@ -135,6 +135,37 @@ export default {
       width: 100%;
       height: 4px;
       background: #333;
+    }
+  }
+}
+
+.numberPad {
+  .output {
+    font-size: 36px;
+    // 使用当前计算机支持的一种等宽字体
+    font-family: Consolas, monospace;
+    padding: 9px 16px;
+    text-align: right;
+  }
+
+  .buttons {
+    //display: flex;
+    //flex-wrap: wrap;
+
+    > button {
+      width: 25%;
+      //height: 7.9vh;
+      height: 64px;
+      float: left;
+
+      &.ok {
+        height: 64*2px;
+        float: right;
+      }
+
+      &.zero {
+        width: 25*2%;
+      }
     }
   }
 }
