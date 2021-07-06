@@ -53,4 +53,37 @@ export default {
 
 <style lang="scss" scoped>
 @import "~@/assets/styles/helper.scss";
+
+.tags {
+  font-size: 14px;
+  padding: 16px;
+
+  > .current {
+    display: flex;
+
+    > li {
+      background: #d9d9d9;
+      $h: 24px;
+      height: $h;
+      //只有一行字的时候行高设置和高度一样高，就能保证文字垂直居中，其他情况使用 flex 布局
+      line-height: $h;
+      //border-radius: (24px/2);
+      border-radius: $h/2;
+      padding: 0 16px;
+      margin-right: 12px;
+    }
+  }
+
+  > .new {
+    padding-top: 16px;
+
+    button {
+      background: transparent;
+      border: none;
+      color: #999;
+      border-bottom: 1px solid;
+      padding: 0 4px;
+    }
+  }
+}
 </style>

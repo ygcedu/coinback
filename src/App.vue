@@ -18,6 +18,7 @@ body {
   /*浅黑色*/
   color: #333;
   font-family: $font-hei;
+  font-size: 16px;
   line-height: 1.5;
 }
 </style>
