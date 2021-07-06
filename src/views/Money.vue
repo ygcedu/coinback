@@ -1,5 +1,5 @@
 <template>
-  <Layout content-class="xxx">
+  <Layout class-prefix="xxx">
     <div class="tags">
       <ul class="current">
         <li>衣</li>
@@ -52,8 +52,12 @@ export default {
 </script>
 
 <style lang="scss">
-.xxx {
-  border: 1px solid red;
+.xxx-wrapper {
+  border: 3px solid blue;
+}
+
+.xxx-content {
+  border: 3px solid red;
 }
 </style>
 
