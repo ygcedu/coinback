@@ -1,11 +1,10 @@
 <template>
   <div>
     <label class="notes">
-      {{ x }}
+      {{ value }}
       <span class="name">备注</span>
       <input type="text"
-             :value="x"
-             @input="x = $event.target.value"
+             v-model="value"
              placeholder="在这里输入备注">
     </label>
   </div>
@@ -17,7 +16,7 @@ import {Component, Prop} from 'vue-property-decorator';
 
 @Component
 export default class Notes extends Vue {
-  x = '';
+  value = '';
 }
 </script>
 
