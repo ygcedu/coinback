@@ -4,20 +4,20 @@
     <!-- <div class="output">{{ output || '&nbsp;' }}</div>-->
     <div class="output">{{ output }}</div>
     <div class="buttons">
-      <button @click="output+=1">1</button>
-      <button @click="output+=2">2</button>
-      <button @click="output+=3">3</button>
+      <button @click="inputContent">1</button>
+      <button @click="inputContent">2</button>
+      <button @click="inputContent">3</button>
       <button>删除</button>
-      <button>4</button>
-      <button>5</button>
-      <button>6</button>
+      <button @click="inputContent">4</button>
+      <button @click="inputContent">5</button>
+      <button @click="inputContent">6</button>
       <button>清空</button>
-      <button>7</button>
-      <button>8</button>
-      <button>9</button>
+      <button @click="inputContent">7</button>
+      <button @click="inputContent">8</button>
+      <button @click="inputContent">9</button>
       <button class="ok">OK</button>
       <button class="zero">0</button>
-      <button>.</button>
+      <button @click="inputContent">.</button>
     </div>
   </div>
 </template>
@@ -28,7 +28,15 @@ import {Component, Prop} from 'vue-property-decorator';
 
 @Component
 export default class NumberPad extends Vue {
-  output = '';
+  output = '0';
+
+  inputContent(event: MouseEvent) {
+    if (event.target) {
+      // as 强制指定类型
+      const button = (event.target as HTMLButtonElement);
+      this.output += button.textContent;
+    }
+  }
 }
 </script>
 
