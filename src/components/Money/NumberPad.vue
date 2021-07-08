@@ -16,7 +16,7 @@
       <button @click="inputContent">8</button>
       <button @click="inputContent">9</button>
       <button class="ok">OK</button>
-      <button class="zero">0</button>
+      <button class="zero" @click="inputContent">0</button>
       <button @click="inputContent">.</button>
     </div>
   </div>
@@ -34,7 +34,22 @@ export default class NumberPad extends Vue {
     if (event.target) {
       // as 强制指定类型
       const button = (event.target as HTMLButtonElement);
-      this.output += button.textContent;
+      const input = button.textContent!;// ! 表示肯定不是空
+      if (this.output.length === 16){
+        return;
+      }
+      if (this.output === '0') {
+        if ('0123456789'.indexOf(input) >= 0) {
+          this.output = input;
+        } else {
+          this.output += input;
+        }
+        return;
+      }
+      if (this.output.indexOf('.') >= 0 && input === '.') {
+        return;
+      }
+      this.output += input;
     }
   }
 }
