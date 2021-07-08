@@ -1,10 +1,12 @@
 <template>
   <div class="numberPad">
-    <div class="output">100</div>
+    <!-- 使用保底值把高度撑高-->
+    <!-- <div class="output">{{ output || '&nbsp;' }}</div>-->
+    <div class="output">{{ output }}</div>
     <div class="buttons">
-      <button>1</button>
-      <button>2</button>
-      <button>3</button>
+      <button @click="output+=1">1</button>
+      <button @click="output+=2">2</button>
+      <button @click="output+=3">3</button>
       <button>删除</button>
       <button>4</button>
       <button>5</button>
@@ -21,9 +23,13 @@
 </template>
 
 <script lang="ts">
-export default {
-  name: 'NumberPad'
-};
+import Vue from 'vue';
+import {Component, Prop} from 'vue-property-decorator';
+
+@Component
+export default class NumberPad extends Vue {
+  output = '';
+}
 </script>
 
 <style lang="scss" scoped>
@@ -38,6 +44,8 @@ export default {
     font-family: Consolas, monospace;
     padding: 9px 16px;
     text-align: right;
+    // 不用 min-height，防止字体高度不一样
+    height: 72px;
   }
 
   .buttons {
