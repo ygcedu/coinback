@@ -8,7 +8,7 @@
 @import "~@/assets/styles/helper.scss";
 @import "~@/assets/styles/reset.scss";
 body {
-
+  background: #f5f5f5;
 }
 
 #app {
