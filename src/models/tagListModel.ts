@@ -14,7 +14,7 @@ const tagListModel: TagListModel = {
   },
   create(name: string) {
     if (this.data.indexOf(name) >= 0) {
-      return false;
+      throw new Error('duplicate');
     }
     this.data.push(name);
     this.save();
