@@ -66,7 +66,7 @@ export default class NumberPad extends Vue {
   }
 
   ok() {
-    // TODO: 完成记账功能
+    this.$emit('update:value', this.output);
   }
 }
 </script>
