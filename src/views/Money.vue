@@ -14,11 +14,13 @@ import Notes from '@/components/Money/Notes.vue';
 import Tags from '@/components/Money/Tags.vue';
 import Vue from 'vue';
 import {Component, Watch} from 'vue-property-decorator';
-import model from '@/model';
-import RecordItem from '@/custom';
+import recordListModel from '@/models/recordListModel';
+import {RecordItem} from '@/custom';
+import tagListModel from '@/models/tagListModel';
 
 const version = window.localStorage.getItem('version') || '0';
-const recordList = model.fetch();
+const recordList = recordListModel.fetch();
+const tagList = tagListModel.fetch();
 
 if (version === '0.0.1') {
   // 数据库升级，数据迁移
@@ -26,7 +28,7 @@ if (version === '0.0.1') {
     record.createAt = new Date(2020, 0, 1);
   });
   // 保存数据
-  model.save(recordList);
+  recordListModel.save(recordList);
 } else if (version === '0.0.2') {
   // 迁移
 }
@@ -37,7 +39,7 @@ window.localStorage.setItem('version', '0.0.3');
   components: {Tags, Notes, Types, NumberPad}
 })
 export default class Money extends Vue {
-  tags = ['衣', '食', '住', '行'];
+  tags = tagList;
   recordList: RecordItem[] = recordList;
   record: RecordItem = {tags: [], notes: '', type: '-', amount: 0};
 
@@ -55,7 +57,7 @@ export default class Money extends Vue {
 
   saveRecord() {
     // 深拷贝
-    const record2: RecordItem = model.clone(this.record);
+    const record2: RecordItem = recordListModel.clone(this.record);
     record2.createAt = new Date();
     this.recordList.push(record2);
     console.log(this.recordList);
@@ -63,7 +65,7 @@ export default class Money extends Vue {
 
   @Watch('recordList')
   onRecordListChanged() {
-    model.save(this.recordList);
+    recordListModel.save(this.recordList);
   }
 }
 </script>
