@@ -1,7 +1,7 @@
 type TagListModel = {
   data: string[]
   fetch: () => string[]
-  create: (name: string) => boolean
+  create: (name: string) => number // 0 表示成功，1 表示 name 重复
   save: () => void
 }
 const localStorageKeyName = 'tagList';
@@ -14,11 +14,11 @@ const tagListModel: TagListModel = {
   },
   create(name: string) {
     if (this.data.indexOf(name) >= 0) {
-      throw new Error('duplicate');
+      return 1;
     }
     this.data.push(name);
     this.save();
-    return true;
+    return 0;
   },
   save() {
     window.localStorage.setItem(localStorageKeyName, JSON.stringify(this.data));
