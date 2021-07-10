@@ -9,4 +9,4 @@ const model = {
   }
 }
 
-export default model
+export {model}
