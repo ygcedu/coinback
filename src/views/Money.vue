@@ -15,9 +15,11 @@ import Notes from '@/components/Money/Notes.vue';
 import Tags from '@/components/Money/Tags.vue';
 import Vue from 'vue';
 import {Component, Watch} from 'vue-property-decorator';
+// import model from '@/model.js';
+const model = require('@/model.js').default;
 
 const version = window.localStorage.getItem('version') || '0';
-const recordList: Record[] = JSON.parse(window.localStorage.getItem('recordList') || '[]');
+const recordList: Record[] = model.fetch();
 
 if (version === '0.0.1') {
   // 数据库升级，数据迁移
@@ -25,7 +27,7 @@ if (version === '0.0.1') {
     record.createAt = new Date(2020, 0, 1);
   });
   // 保存数据
-  window.localStorage.setItem('recordList', JSON.stringify(recordList));
+  model.save(recordList);
 } else if (version === '0.0.2') {
   // 迁移
 }
