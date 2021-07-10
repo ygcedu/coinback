@@ -18,8 +18,8 @@
         <Icon name="right"/>
       </li>
     </ol>
-    <div>
-      <button>新建标签</button>
+    <div class="createTag-wrapper">
+      <button class="createTag">新建标签</button>
     </div>
   </Layout>
 </template>
@@ -33,8 +33,39 @@ export default {
 <style lang="scss" scoped>
 .tags {
   background: white;
-  > li {
+  font-size: 16px;
+  padding-left: 16px;
 
+  > li {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e6e6e6;
+
+    svg {
+      width: 18px;
+      height: 18px;
+      color: #666;
+      margin-right: 16px;
+    }
+  }
+}
+
+.createTag {
+  background: #767676;
+  color: white;
+  border-radius: 4px;
+  border: none;
+  height: 40px;
+  padding: 0 16px;
+
+  // 父元素
+  &-wrapper {
+    text-align: center;
+    // padding 不会出现 margin 的合并问题
+    padding: 16px;
+    margin-top: 44-16px;
   }
 }
 </style>
