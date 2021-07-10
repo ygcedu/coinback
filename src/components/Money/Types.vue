@@ -3,8 +3,8 @@
     <ul class="types">
       <!-- 如果是 false，vue 会智能地忽略掉 -->
       <!-- 等价于: type === '-' ? 'selected' : ''-->
-      <li :class="type === '-' && 'selected'" @click="selectType('-')">支出</li>
-      <li :class="type === '+' && 'selected'" @click="selectType('+')">收入</li>
+      <li :class="value === '-' && 'selected'" @click="selectType('-')">支出</li>
+      <li :class="value === '+' && 'selected'" @click="selectType('+')">收入</li>
     </ul>
   </div>
 </template>
@@ -15,17 +15,13 @@ import {Component, Prop, Watch} from 'vue-property-decorator';
 
 @Component
 export default class Types extends Vue {
-  type = '-';// '-'表示支出，'+'表示收入
+  @Prop() readonly value!: string;
+
   selectType(type: string) {
     if (type !== '-' && type !== '+') {
       throw new Error('type is unknown');
     }
-    this.type = type;
-  }
-
-  @Watch('type')
-  onTypeChanged(value: string) {
-    this.$emit('update:value', value);
+    this.$emit('update:value', type);
   }
 }
 </script>
