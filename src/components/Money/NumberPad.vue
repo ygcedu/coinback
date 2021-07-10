@@ -28,14 +28,15 @@ import {Component, Prop} from 'vue-property-decorator';
 
 @Component
 export default class NumberPad extends Vue {
-  output = '0';
+  @Prop() readonly value!: number;
+  output = this.value.toString();
 
   inputContent(event: MouseEvent) {
     if (event.target) {
       // as 强制指定类型
       const button = (event.target as HTMLButtonElement);
       const input = button.textContent!;// ! 表示肯定不是空
-      if (this.output.length === 16){
+      if (this.output.length === 16) {
         return;
       }
       if (this.output === '0') {
