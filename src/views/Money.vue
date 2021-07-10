@@ -16,7 +16,7 @@ import Tags from '@/components/Money/Tags.vue';
 import Vue from 'vue';
 import {Component, Watch} from 'vue-property-decorator';
 // import model from '@/model.js';
-const model = require('@/model.js').model;
+const {model} = require('@/model.js');
 
 const version = window.localStorage.getItem('version') || '0';
 const recordList: Record[] = model.fetch();
