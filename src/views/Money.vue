@@ -2,9 +2,11 @@
   <Layout class-prefix="layout">
     <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
     <Types :value.sync="record.type"/>
-    <FormItem field-name="备注"
-           placeholder="在这里输入备注"
-           @update:value="onUpdateNotes"/>
+    <div class="notes">
+      <FormItem field-name="备注"
+                placeholder="在这里输入备注"
+                @update:value="onUpdateNotes"/>
+    </div>
     <Tags :data-source.sync="tags" @update:value="onUpdateTags"/>
   </Layout>
 </template>
@@ -77,5 +79,10 @@ export default class Money extends Vue {
   display: flex;
   // 从下往上布局
   flex-direction: column-reverse;
+}
+
+.notes {
+  // 想要 EditLabel 高度不一样，就给外部包裹用 div 加 padding
+  padding: 12px 0;
 }
 </style>
