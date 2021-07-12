@@ -32,7 +32,7 @@ if (version === '0.0.1') {
     record.createAt = new Date(2020, 0, 1);
   });
   // 保存数据
-  recordListModel.save(recordList);
+  recordListModel.save();
 } else if (version === '0.0.2') {
   // 迁移
 }
@@ -55,21 +55,14 @@ export default class Money extends Vue {
     this.record.notes = value;
   }
 
-  onUpdateAmount(value: string) {
-    this.record.amount = parseFloat(value);
-  }
-
   saveRecord() {
     // 深拷贝
-    const record2: RecordItem = recordListModel.clone(this.record);
-    record2.createAt = new Date();
-    this.recordList.push(record2);
-    console.log(this.recordList);
+    recordListModel.create(this.record);
   }
 
   @Watch('recordList')
   onRecordListChanged() {
-    recordListModel.save(this.recordList);
+    recordListModel.save();
   }
 }
 </script>
