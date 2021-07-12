@@ -20,8 +20,11 @@ type TagListModel = {
   save: () => void
 }
 
-interface Window {
-  tagList: Tag[]
+declare global {
+  interface Window {
+    tagList: Tag[]
+    createTag: (name: string) => void
+  }
 }
 
 export {RecordItem, Window, TagListModel, Tag};
