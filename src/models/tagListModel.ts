@@ -1,20 +1,7 @@
 import createId from '@/lib/idCreator';
+import {TagListModel} from '@/custom';
 
 const localStorageKeyName = 'tagList';
-
-type Tag = {
-  id: string // id 理论上应该是由数据库 id 生成器自动生成的随机数字
-  name: string
-}
-
-type TagListModel = {
-  data: Tag[]
-  fetch: () => Tag[]
-  create: (name: string) => 'success' | 'duplicated' // 联合类型
-  update: (id: string, name: string) => 'success' | 'not found' | 'duplicated'
-  remove: (id: string) => boolean
-  save: () => void
-}
 
 const tagListModel: TagListModel = {
   data: [],
@@ -54,8 +41,8 @@ const tagListModel: TagListModel = {
     for (let i = 0; i < this.data.length; i++) {
       if (this.data[i].id === id) {
         index = i;
+        break;
       }
-      break;
     }
     this.data.splice(index, 1);
     this.save();
