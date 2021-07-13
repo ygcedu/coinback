@@ -20,6 +20,10 @@ import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import {RecordItem} from '@/custom';
 import store from '@/store/index2';
+import store2 from '@/store/index2';
+
+console.log('store === store2');
+console.log(store === store2);
 
 @Component({
   components: {Tags, FormItem, Types, NumberPad}
