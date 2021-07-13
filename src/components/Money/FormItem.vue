@@ -1,7 +1,6 @@
 <template>
   <div>
     <label class="formItem">
-      {{ value }}
       <span class="name">{{ this.fieldName }}</span>
       <input type="text"
              :value="value"
@@ -13,7 +12,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component, Prop, Watch} from 'vue-property-decorator';
+import {Component, Prop} from 'vue-property-decorator';
 
 @Component
 export default class FormItem extends Vue {
