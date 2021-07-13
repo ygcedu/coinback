@@ -24,15 +24,23 @@ import {RecordItem} from '@/custom';
 import store from '@/store/index2';
 
 @Component({
-  components: {Tags, FormItem, Types, NumberPad}
+  components: {Tags, FormItem, Types, NumberPad},
+  computed: {
+    count() {
+      return store.count;
+    },
+    recordList(){
+      return store.recordList; // recordList 地址复制到 recordList
+    }
+  }
 })
 export default class Money extends Vue {
-  count = store.count;// 0 值复制到 count
+  store = store;
+
   add() {
     store.addCount();
   }
 
-  recordList = store.recordList; // recordList 地址复制到 recordList
   record: RecordItem = {tags: [], notes: '', type: '-', amount: 0};
 
   onUpdateNotes(value: string) {
