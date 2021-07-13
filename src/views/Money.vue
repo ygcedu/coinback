@@ -21,22 +21,21 @@ import Tags from '@/components/Money/Tags.vue';
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import {RecordItem} from '@/custom';
-import store from '@/store/index2';
 
 @Component({
   components: {Tags, FormItem, Types, NumberPad},
   computed: {
     count() {
-      return store.count;
+      return this.$store2.count;
     },
     recordList(){
-      return store.recordList; // recordList 地址复制到 recordList
+      return this.$store2.recordList; // recordList 地址复制到 recordList
     }
   }
 })
 export default class Money extends Vue {
   add() {
-    store.addCount();
+    this.$store2.addCount();
   }
 
   record: RecordItem = {tags: [], notes: '', type: '-', amount: 0};
@@ -46,7 +45,7 @@ export default class Money extends Vue {
   }
 
   saveRecord() {
-    store.createRecord(this.record);
+    this.$store2.createRecord(this.record);
   }
 }
 </script>
