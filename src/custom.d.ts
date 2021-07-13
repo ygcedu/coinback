@@ -27,6 +27,8 @@ declare global {
     createTag: (name: string) => void
     removeTag: (id: string) => boolean
     updateTag: TagListModel['update']// 类型和 TagListModel 里面的 update 一样
+    recordList: RecordItem[]
+    createRecord: (record: RecordItem) => void
   }
 }
 
