@@ -2,23 +2,24 @@ import {RecordItem} from '@/custom';
 import clone from '@/lib/clone';
 
 const localStorageKeyName = 'recordList';
-let data: RecordItem[] | undefined = undefined;
 
 const recordStore = {
-  recordList: data,
+  recordList: [] as RecordItem[],
   // record store
   fetchRecords() {
-    data = JSON.parse(window.localStorage.getItem(localStorageKeyName) || '[]') as RecordItem[];
+    this.recordList = JSON.parse(window.localStorage.getItem(localStorageKeyName) || '[]') as RecordItem[];
     // as 强行指定返回数据类型为 RecordItem[]
-    return data;
+    return this.recordList;
   },
   saveRecord() {
-    window.localStorage.setItem(localStorageKeyName, JSON.stringify(data));
+    window.localStorage.setItem(localStorageKeyName, JSON.stringify(this.recordList));
   },
-  createRecord: (record: RecordItem) => {
+  createRecord(record: RecordItem) {
     const record2: RecordItem = clone(record);
     record2.createAt = new Date();
-    data && data.push(record2);
+    // 可选链语法（ES2020）
+    // this.recordList?.push(record2);
+    this.recordList && this.recordList.push(record2);
     recordStore.saveRecord();
   }
 };
