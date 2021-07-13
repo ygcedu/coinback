@@ -8,6 +8,8 @@
                 @update:value="onUpdateNotes"/>
     </div>
     <Tags/>
+    {{ count }}
+    <button @click="add">+1</button>
   </Layout>
 </template>
 
@@ -25,7 +27,12 @@ import store from '@/store/index2';
   components: {Tags, FormItem, Types, NumberPad}
 })
 export default class Money extends Vue {
-  recordList = store.recordList;
+  count = store.count;// 0 值复制到 count
+  add() {
+    store.addCount();
+  }
+
+  recordList = store.recordList; // recordList 地址复制到 recordList
   record: RecordItem = {tags: [], notes: '', type: '-', amount: 0};
 
   onUpdateNotes(value: string) {
