@@ -35,8 +35,6 @@ import store from '@/store/index2';
   }
 })
 export default class Money extends Vue {
-  store = store;
-
   add() {
     store.addCount();
   }
