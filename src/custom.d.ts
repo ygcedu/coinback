@@ -22,13 +22,15 @@ type TagListModel = {
 
 declare global {
   interface Window {
-    tagList: Tag[]
-    findTag: (id: string) => Tag | undefined
-    createTag: (name: string) => void
-    removeTag: (id: string) => boolean
-    updateTag: TagListModel['update']// 类型和 TagListModel 里面的 update 一样
-    recordList: RecordItem[]
-    createRecord: (record: RecordItem) => void
+    store: {
+      tagList: Tag[]
+      findTag: (id: string) => Tag | undefined
+      createTag: (name: string) => void
+      removeTag: (id: string) => boolean
+      updateTag: TagListModel['update']// 类型和 TagListModel 里面的 update 一样
+      recordList: RecordItem[]
+      createRecord: (record: RecordItem) => void
+    }
   }
 }
 
