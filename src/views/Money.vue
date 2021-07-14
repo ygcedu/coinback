@@ -8,8 +8,6 @@
                 @update:value="onUpdateNotes"/>
     </div>
     <Tags/>
-    {{ count }}
-    <button @click="$store.commit('increment', 1)">+1</button>
   </Layout>
 </template>
 
@@ -34,11 +32,11 @@ import {RecordItem} from '@/custom';
   }
 })
 export default class Money extends Vue {
-  add() {
-    this.$store.commit('increment', 1);
-  }
-
   record: RecordItem = {tags: [], notes: '', type: '-', amount: 0};
+
+  created() {
+    this.$store.commit('fetchRecords');
+  }
 
   onUpdateNotes(value: string) {
     this.record.notes = value;

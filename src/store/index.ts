@@ -10,10 +10,15 @@ const store = new Vuex.Store({
     recordList: [] as RecordItem[]
   },
   mutations: {// methods
+    fetchRecords(state) {
+      // as 强行指定返回数据类型为 RecordItem[]
+      state.recordList = JSON.parse(window.localStorage.getItem('recordList') || '[]') as RecordItem[];
+    },
     createRecord(state, record: RecordItem) {
       const record2: RecordItem = clone(record);
       record2.createAt = new Date();
       state.recordList.push(record2);
+      store.commit('saveRecord');
       // recordStore.saveRecord();
     },
     saveRecord(state) {
