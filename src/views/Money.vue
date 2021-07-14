@@ -9,7 +9,7 @@
     </div>
     <Tags/>
     {{ count }}
-    <button @click="add">+1</button>
+    <button @click="store.commit('increment',1)">+1</button>
   </Layout>
 </template>
 
@@ -22,12 +22,13 @@ import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import {RecordItem} from '@/custom';
 import oldStore from '@/store/index2';
+import store from '@/store/index';
 
 @Component({
   components: {Tags, FormItem, Types, NumberPad},
-  computed: {
+  computed: {// 使用计算属性获取数据 count，而不是 state
     count() {
-      return oldStore.count;
+      return store.state.count;
     },
     recordList(){
       return oldStore.recordList; // recordList 地址复制到 recordList
