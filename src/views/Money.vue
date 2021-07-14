@@ -21,17 +21,15 @@ import Tags from '@/components/Money/Tags.vue';
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import {RecordItem} from '@/custom';
-import oldStore from '@/store/index2';
-import store from '@/store/index';
 
 @Component({
   components: {Tags, FormItem, Types, NumberPad},
   computed: {// 使用计算属性获取数据 count，而不是 state
     count() {
-      return store.state.count;
+      return this.$store.state.count;
     },
-    recordList(){
-      return oldStore.recordList; // recordList 地址复制到 recordList
+    recordList() {
+      return this.$store.state.recordList; // recordList 地址复制到 recordList
     }
   }
 })
@@ -47,7 +45,7 @@ export default class Money extends Vue {
   }
 
   saveRecord() {
-    oldStore.createRecord(this.record);
+    this.$store.commit('createRecord', this.record);
   }
 }
 </script>
