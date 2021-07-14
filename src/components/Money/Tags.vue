@@ -19,14 +19,16 @@ import {Component} from 'vue-property-decorator';
 @Component({
   computed: {
     tagList() {
-      // TODO
-      // return this.$store.fetchTags();
-      return [];
+      return this.$store.state.tagList;
     }
   }
 })
 export default class Tags extends Vue {
   selectedTags: string[] = [];
+
+  created() {
+    this.$store.commit('fetchTags');
+  }
 
   // 开关
   toggle(tag: string) {
@@ -44,8 +46,7 @@ export default class Tags extends Vue {
     if (!name) {
       return window.alert('标签名不能为空');
     }
-    // TODO
-    // this.$store.createTag(name);
+    this.$store.commit('createTag', name);
   }
 }
 </script>
