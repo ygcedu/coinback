@@ -9,7 +9,7 @@
     </div>
     <Tags/>
     {{ count }}
-    <button @click="store.commit('increment',1)">+1</button>
+    <button @click="$store.commit('increment', 1)">+1</button>
   </Layout>
 </template>
 
@@ -37,7 +37,7 @@ import store from '@/store/index';
 })
 export default class Money extends Vue {
   add() {
-    oldStore.addCount();
+    this.$store.commit('increment', 1);
   }
 
   record: RecordItem = {tags: [], notes: '', type: '-', amount: 0};
