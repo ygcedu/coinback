@@ -6,12 +6,22 @@ import createId from '@/lib/idCreator';
 
 Vue.use(Vuex);// 把 store 绑到 Vue.prototype 上，在Vue初始化的时候传，Vue.prototype.$store = store，详情参见 main.ts
 
+type RootState = {
+  recordList: RecordItem[],
+  tagList: Tag[],
+  currentTag?: Tag
+}
+
 const store = new Vuex.Store({
   state: {// data
-    recordList: [] as RecordItem[],
-    tagList: [] as Tag[],
-  },
+    recordList: [],
+    tagList: [],
+    currentTag: undefined
+  } as RootState,
   mutations: {// methods
+    setCurrentTag(state, id) {
+      state.currentTag = state.tagList.filter(t => t.id === id)[0];
+    },
     fetchRecords(state) {
       // as 强行指定返回数据类型为 RecordItem[]
       state.recordList = JSON.parse(window.localStorage.getItem('recordList') || '[]') as RecordItem[];
@@ -44,7 +54,7 @@ const store = new Vuex.Store({
     },
     saveTags(state) {
       window.localStorage.setItem('tagList', JSON.stringify(state.tagList));
-    }
+    },
   }
 });
 
