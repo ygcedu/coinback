@@ -21,18 +21,14 @@ import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import FormItem from '@/components/Money/FormItem.vue';
 import Button from '@/components/Button.vue';
-import {Tag} from '@/custom';
 
 @Component({
   components: {Button, FormItem},
-  computed: {
-    tag() {
-      return this.$store.state.currentTag;
-    }
-  }
 })
 export default class EditLabel extends Vue {
-  tag?: Tag = undefined;
+  get tag() {
+    return this.$store.state.currentTag;
+  }
 
   created() {
     this.$store.commit('setCurrentTag', this.$route.params.id);
