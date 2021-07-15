@@ -22,17 +22,13 @@ import {RecordItem} from '@/custom';
 
 @Component({
   components: {Tags, FormItem, Types, NumberPad},
-  computed: {// 使用计算属性获取数据 count，而不是 state
-    count() {
-      return this.$store.state.count;
-    },
-    recordList() {
-      return this.$store.state.recordList; // recordList 地址复制到 recordList
-    }
-  }
 })
 export default class Money extends Vue {
   record: RecordItem = {tags: [], notes: '', type: '-', amount: 0};
+
+  get recordList() {
+    return this.$store.state.recordList; // recordList 地址复制到 recordList
+  }
 
   created() {
     this.$store.commit('fetchRecords');
