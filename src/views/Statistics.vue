@@ -1,8 +1,12 @@
 <template>
   <Layout>
-    <Types class-prefix="type" :value.sync="yyy"/>
-    <Tabs class-prefix="type" :data-source="array2" :value.sync="yyy"/>
-    <Tabs class-prefix="interval" :data-source="array" :value.sync="hhh"/>
+    <Tabs class-prefix="type" :data-source="typeList" :value.sync="type"/>
+    <Tabs class-prefix="interval" :data-source="intervalList" :value.sync="interval"/>
+    <div>
+      type:{{ type }}
+      <br/>
+      interval:{{ interval }}
+    </div>
   </Layout>
 </template>
 
@@ -31,14 +35,14 @@ import Tabs from '@/components/Tabs.vue';
 
 @Component({components: {Tabs, Types},})
 export default class Statistics extends Vue {
-  yyy = '-';
-  hhh = 'day';
-  array = [
+  type = '-';
+  interval = 'day';
+  intervalList = [
     {text: '按天', value: 'day'},
     {text: '按周', value: 'week'},
     {text: '按月', value: 'month'}
   ];
-  array2 = [
+  typeList = [
     {text: '支出', value: '-'},
     {text: '收入', value: '+'}
   ];
