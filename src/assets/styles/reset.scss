@@ -21,3 +21,8 @@ button, input {
 :focus {
   outline: none;
 }
+
+h1, h2, h3, h4, h5, h6 {
+  // 清除标题字体加粗效果
+  font-weight: normal;
+}
