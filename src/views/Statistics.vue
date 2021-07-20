@@ -3,8 +3,8 @@
     <Tabs class-prefix="type" :data-source="recordTypeList" :value.sync="type"/>
     <Tabs class-prefix="interval" :data-source="intervalList" :value.sync="interval" height="48px"/>
     <ol>
-      <li v-for="(group,index) in result" :key="index">
-        <h3 class="title">{{ group.title }}</h3>
+      <li v-for="group in result" :key="group.title">
+        <h3 class="title">{{ beautify(group.title) }}</h3>
         <ol>
           <li v-for="item in group.items" :key="item.id"
               class="record">
@@ -19,30 +19,6 @@
   </Layout>
 </template>
 
-<style scoped lang="scss">
-%item {
-  padding: 8px 16px;
-  line-height: 24px;
-  display: flex;
-  justify-content: space-between;
-  align-content: center;
-}
-
-.title {
-  @extend %item;
-}
-
-.record {
-  @extend %item;
-  background: white;
-}
-
-.notes {
-  margin-right: auto; // 让备注靠左一些
-  margin-left: 16px;
-  color: #999;
-}
-</style>
 
 <script lang="ts">
 import Vue from 'vue';
@@ -56,6 +32,19 @@ import {RecordItem, RootState, Tag} from '@/custom';
 export default class Statistics extends Vue {
   tagString(tags: Tag[]) {
     return tags.length === 0 ? '无' : tags.join(',');
+  }
+
+  beautify(string: string) {
+    const d = new Date(Date.parse(string));
+    const y = d.getFullYear();
+    const m = d.getMonth();
+    const dd = d.getDate();
+    const now = new Date();
+    if (now.getFullYear() === y && now.getMonth() === m && now.getDate() === dd) {
+      return '今天';
+    } else {
+      return string;
+    }
   }
 
   get recordList() {
@@ -107,5 +96,28 @@ export default class Statistics extends Vue {
   .interval-tabs-item {
     /*height: 48px;*/
   }
+}
+
+%item {
+  padding: 8px 16px;
+  line-height: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+}
+
+.title {
+  @extend %item;
+}
+
+.record {
+  @extend %item;
+  background: white;
+}
+
+.notes {
+  margin-right: auto; // 让备注靠左一些
+  margin-left: 16px;
+  color: #999;
 }
 </style>
