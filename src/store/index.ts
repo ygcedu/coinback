@@ -1,18 +1,14 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import {RecordItem, Tag} from '@/custom';
+import {RecordItem, RootState} from '@/custom';
 import clone from '@/lib/clone';
 import createId from '@/lib/idCreator';
 import router from '@/router';
 
 Vue.use(Vuex);// 把 store 绑到 Vue.prototype 上，在Vue初始化的时候传，Vue.prototype.$store = store，详情参见 main.ts
 
-type RootState = {
-  recordList: RecordItem[],
-  tagList: Tag[],
-  currentTag?: Tag
-}
-
+// 用泛型指定类型
+// const store = new Vuex.Store<RootState>({
 const store = new Vuex.Store({
   state: {// data
     recordList: [],
@@ -60,7 +56,7 @@ const store = new Vuex.Store({
     },
     createRecord(state, record: RecordItem) {
       const record2: RecordItem = clone(record);
-      record2.createAt = new Date();
+      record2.createdAt = new Date().toISOString();// ISO 8601 格式的时间字符串
       state.recordList.push(record2);
       store.commit('saveRecord');
       // recordStore.saveRecord();
