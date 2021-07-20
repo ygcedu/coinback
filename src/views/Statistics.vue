@@ -27,7 +27,9 @@ import Tabs from '@/components/Tabs.vue';
 import intervalList from '@/constants/intervalList';
 import recordTypeList from '@/constants/recordTypeList';
 import {RecordItem, RootState, Tag} from '@/custom';
+import dayjs from 'dayjs';
 
+const oneDay = 86400 * 1000;
 @Component({components: {Tabs},})
 export default class Statistics extends Vue {
   tagString(tags: Tag[]) {
@@ -35,13 +37,11 @@ export default class Statistics extends Vue {
   }
 
   beautify(string: string) {
-    const d = new Date(Date.parse(string));
-    const y = d.getFullYear();
-    const m = d.getMonth();
-    const dd = d.getDate();
     const now = new Date();
-    if (now.getFullYear() === y && now.getMonth() === m && now.getDate() === dd) {
+    if (dayjs(string).isSame(now, 'day')) {
       return '今天';
+    } else if (dayjs(string).isSame(now.valueOf() - oneDay, 'day')) {
+      return '昨天';
     } else {
       return string;
     }
