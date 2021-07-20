@@ -37,13 +37,19 @@ export default class Statistics extends Vue {
   }
 
   beautify(string: string) {
-    const now = new Date();
-    if (dayjs(string).isSame(now, 'day')) {
+    const day = dayjs(string);
+    const now = dayjs();
+    if (day.isSame(now, 'day')) {
+      // fixme: 这里今天计算出的是 UTC 零时区的'今天'，并不是东八区（UTC+8）的'今天'
       return '今天';
-    } else if (dayjs(string).isSame(now.valueOf() - oneDay, 'day')) {
+    } else if (day.isSame(now.subtract(1, 'day'), 'day')) {
       return '昨天';
+    } else if (day.isSame(now.subtract(2, 'day'), 'day')) {
+      return '前天';
+    } else if (day.isSame(now, 'year')) {
+      return day.format('M月D日');
     } else {
-      return string;
+      return day.format('YYYY年M月D日');
     }
   }
 
