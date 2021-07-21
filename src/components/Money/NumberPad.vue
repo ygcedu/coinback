@@ -28,7 +28,7 @@ import {Component, Prop} from 'vue-property-decorator';
 
 @Component
 export default class NumberPad extends Vue {
-  @Prop() readonly value!: number;
+  @Prop(Number) readonly value!: number;
   output = this.value.toString();
 
   inputContent(event: MouseEvent) {
@@ -67,8 +67,10 @@ export default class NumberPad extends Vue {
   }
 
   ok() {
-    this.$emit('update:value', this.output);
-    this.$emit('submit', this.output);
+    const number = parseFloat(this.output);
+    // $emit 第二个参数的类型是 any，typescript无法检测，需要人为处理一下
+    this.$emit('update:value', number);
+    this.$emit('submit', number);
     // 提交后数据置空
     this.output = '0';
   }

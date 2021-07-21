@@ -1,10 +1,9 @@
 <template>
   <Layout>
     <Tabs class-prefix="type" :data-source="recordTypeList" :value.sync="type"/>
-    <Tabs class-prefix="interval" :data-source="intervalList" :value.sync="interval" height="48px"/>
     <ol>
       <li v-for="(group, index) in groupedList" :key="index">
-        <h3 class="title">{{ beautify(group.title) }}</h3>
+        <h3 class="title">{{ beautify(group.title) }}<span>￥{{ group.total }}</span></h3>
         <ol>
           <li v-for="item in group.items" :key="item.id"
               class="record">
@@ -24,9 +23,8 @@
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import Tabs from '@/components/Tabs.vue';
-import intervalList from '@/constants/intervalList';
 import recordTypeList from '@/constants/recordTypeList';
-import {RootState, Tag} from '@/custom';
+import {RecordItem, RootState, Tag} from '@/custom';
 import dayjs from 'dayjs';
 import clone from '@/lib/clone';
 
@@ -65,8 +63,11 @@ export default class Statistics extends Vue {
     if (recordList.length === 0) {
       return [];
     }
-    const newList = clone(recordList).sort((a, b) => dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf());
-    const result = [{title: dayjs(newList[0].createdAt).format('YYYY-MM-DD'), items: [newList[0]]}];
+    const newList = clone(recordList)
+      .filter(r => r.type === this.type)
+      .sort((a, b) => dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf());
+    type Result = { title: string, total?: number, items: RecordItem[] }[];
+    const result: Result = [{title: dayjs(newList[0].createdAt).format('YYYY-MM-DD'), items: [newList[0]]}];
     for (let i = 1; i < newList.length; i++) {
       const current = newList[i];
       const last = result[result.length - 1];
@@ -76,6 +77,11 @@ export default class Statistics extends Vue {
         result.push({title: dayjs(current.createdAt).format('YYYY-MM-DD'), items: [current]});
       }
     }
+    // forEach 就是一个有返回值的 map
+    // result.forEach(group => {
+    result.map(group => {
+      group.total = group.items.reduce((sum, item) => sum + item.amount, 0);
+    });
     return result;
   }
 
@@ -84,8 +90,6 @@ export default class Statistics extends Vue {
   }
 
   type = '-';
-  interval = 'day';
-  intervalList = intervalList;
   recordTypeList = recordTypeList;
 }
 </script>
@@ -93,10 +97,10 @@ export default class Statistics extends Vue {
 <style lang="scss" scoped>
 ::v-deep {
   .type-tabs-item {
-    background: white;
+    background: #c4c4c4;
 
     &.selected {
-      background: #c4c4c4;
+      background: white;
 
       &::after {
         display: none;
