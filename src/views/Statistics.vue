@@ -3,7 +3,7 @@
     <Tabs class-prefix="type" :data-source="recordTypeList" :value.sync="type"/>
     <Tabs class-prefix="interval" :data-source="intervalList" :value.sync="interval" height="48px"/>
     <ol>
-      <li v-for="group in result" :key="group.title">
+      <li v-for="(group, index) in groupedList" :key="index">
         <h3 class="title">{{ beautify(group.title) }}</h3>
         <ol>
           <li v-for="item in group.items" :key="item.id"
@@ -26,7 +26,7 @@ import {Component} from 'vue-property-decorator';
 import Tabs from '@/components/Tabs.vue';
 import intervalList from '@/constants/intervalList';
 import recordTypeList from '@/constants/recordTypeList';
-import {RecordItem, RootState, Tag} from '@/custom';
+import {RootState, Tag} from '@/custom';
 import dayjs from 'dayjs';
 import clone from '@/lib/clone';
 
@@ -58,15 +58,25 @@ export default class Statistics extends Vue {
     return (this.$store.state as RootState).recordList;
   }
 
-  get result() {
+  get groupedList() {
     // this.recordList;
     // 推荐写法：
     const {recordList} = this;
-    type HashTableValue = { title: string, items: RecordItem[] };
-    // 声明一个对象的 key、value 类型，这里的 key 只是一个示意值，也可以是其他的
-    // const hashTable: HashTableValue[] = [];
+    if (recordList.length === 0) {
+      return [];
+    }
     const newList = clone(recordList).sort((a, b) => dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf());
-    return [];
+    const result = [{title: dayjs(newList[0].createdAt).format('YYYY-MM-DD'), items: [newList[0]]}];
+    for (let i = 1; i < newList.length; i++) {
+      const current = newList[i];
+      const last = result[result.length - 1];
+      if (dayjs(last.title).isSame(dayjs(current.createdAt), 'day')) {
+        last.items.push(current);
+      } else {
+        result.push({title: dayjs(current.createdAt).format('YYYY-MM-DD'), items: [current]});
+      }
+    }
+    return result;
   }
 
   beforeCreate() {
