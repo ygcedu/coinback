@@ -48,7 +48,7 @@ export default class Money extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.layout-content {
+::v-deep .layout-content {
   display: flex;
   // 从下往上布局
   flex-direction: column-reverse;
