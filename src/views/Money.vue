@@ -7,8 +7,8 @@
                 placeholder="在这里输入备注"
                 :value.sync="record.notes"/>
     </div>
-    <!-- todo: 点击 ok 后，清除当前选中的标签 -->
-    <Tags @update:value="record.tags = $event"/>
+    <!-- fixme: 先选择标签，再输入备注会出现标签被清除问题 -->
+    <Tags :selectedTags.sync="record.tags"/>
   </Layout>
 </template>
 
@@ -51,6 +51,7 @@ export default class Money extends Vue {
     if ((this.$store.state.createRecordError === null)) {
       window.alert('已保存');
       this.record.notes = '';
+      this.record.tags = [];
     }
   }
 }
