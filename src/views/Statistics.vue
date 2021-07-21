@@ -28,6 +28,7 @@ import intervalList from '@/constants/intervalList';
 import recordTypeList from '@/constants/recordTypeList';
 import {RecordItem, RootState, Tag} from '@/custom';
 import dayjs from 'dayjs';
+import clone from '@/lib/clone';
 
 const oneDay = 86400 * 1000;
 @Component({components: {Tabs},})
@@ -63,15 +64,9 @@ export default class Statistics extends Vue {
     const {recordList} = this;
     type HashTableValue = { title: string, items: RecordItem[] };
     // 声明一个对象的 key、value 类型，这里的 key 只是一个示意值，也可以是其他的
-    const hashTable: { [key: string]: HashTableValue } = {};
-    for (let i = 0; i < recordList.length; i++) {
-      const [data, time] = recordList[i].createdAt!.split('T');
-      console.log(data);
-      hashTable[data] = hashTable[data] || {title: data, items: []}; //如果是空的，就等于一个数组
-      hashTable[data].items.push(recordList[i]);
-    }
-    console.log(hashTable);
-    return hashTable;
+    // const hashTable: HashTableValue[] = [];
+    const newList = clone(recordList).sort((a, b) => dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf());
+    return [];
   }
 
   beforeCreate() {
