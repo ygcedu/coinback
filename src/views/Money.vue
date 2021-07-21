@@ -7,7 +7,6 @@
                 placeholder="在这里输入备注"
                 :value.sync="record.notes"/>
     </div>
-    <!-- fixme: 先选择标签，再输入备注会出现标签被清除问题 -->
     <Tags :selectedTags.sync="record.tags"/>
   </Layout>
 </template>
