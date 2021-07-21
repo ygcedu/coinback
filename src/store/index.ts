@@ -12,6 +12,7 @@ Vue.use(Vuex);// 把 store 绑到 Vue.prototype 上，在Vue初始化的时候�
 const store = new Vuex.Store({
   state: {// data
     recordList: [],
+    createRecordError: null,
     tagList: [],
     currentTag: undefined
   } as RootState,
@@ -53,6 +54,13 @@ const store = new Vuex.Store({
     fetchRecords(state) {
       // as 强行指定返回数据类型为 RecordItem[]
       state.recordList = JSON.parse(window.localStorage.getItem('recordList') || '[]') as RecordItem[];
+      // 如果发现没有标签，就自动创建 '衣'、'食'、'住'、'行' 四个默认标签
+      if (!state.tagList || state.tagList.length === 0) {
+        store.commit('createTag', '衣');
+        store.commit('createTag', '食');
+        store.commit('createTag', '住');
+        store.commit('createTag', '行');
+      }
     },
     createRecord(state, record: RecordItem) {
       const record2: RecordItem = clone(record);
