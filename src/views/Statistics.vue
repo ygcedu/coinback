@@ -61,7 +61,7 @@ export default class Statistics extends Vue {
     // 推荐写法：
     const {recordList} = this;
     if (recordList.length === 0) {
-      return [];
+      return [] as Result;
     }
     const newList = clone(recordList)
       .filter(r => r.type === this.type)
