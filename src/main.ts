@@ -22,6 +22,6 @@ new Vue({
 // 为了完全显示底部导航栏，将手机浏览器滚动到页面最底部
 window.onload = function () {
   setTimeout(function () {
-    window.scrollTo(0, 10000);
+    window.scrollTo(0, 200);
   }, 0);
 };
