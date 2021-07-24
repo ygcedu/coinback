@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/coinback/precache-manifest.940c05b105d92d19b533a4a677550405.js"
+  "/coinback/precache-manifest.53d1bbcd83acb96c986e84429685b1b1.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "morney"});
